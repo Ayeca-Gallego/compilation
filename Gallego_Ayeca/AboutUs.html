@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<head>
+    <title>About Us</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        .body{
+            font-family: 'Century Gothic';
+        }
+        .navalign{
+            padding-top: 30px;
+        }
+        .intro{
+            margin: 0 auto;
+            padding: 0;
+            width: 1600px;
+            height: 850px;
+            background-image: url(./fancy.png);
+            background-repeat: no-repeat;
+            background-size: cover; 
+            background-position: center; 
+        }
+        .introduction{
+            width: 600px;
+            height: 450px;
+            padding-top: 20px;
+            padding: 20px;
+            font-size: 15px;
+            margin-left: 130px;
+            margin-top: 30px;
+            float: left;
+            background-color: white;
+            opacity: 0.8;
+            border-radius: 20px;
+        }
+        .history{
+            width: 600px;
+            height: 450px;
+            padding-top: 20px;
+            padding: 20px;
+            margin-top: 30px;
+            margin-left: 50px;
+            margin-right: 130px;
+            float: right;
+            background-color: white;
+            opacity: 0.8;
+            border-radius: 20px;
+        }
+        
+             #dialog-overlay {
+                display: none;
+                position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    z-index: 1000;
+                }
+                #dialog-message {
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: #fff;
+                    padding: 20px;
+                    border-radius: 5px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+                .total-price {
+                    font-weight: bold;
+                }
+        
+        
+        .heading{
+            margin-top: 20px;
+            text-align: center;
+            font-size: 50px;
+            color: black;
+            font-weight: bold;
+        }
+        h3{
+            text-align: center;
+        }
+        h4{
+            text-align: center;
+        }
+        p{
+            text-align: justify;
+            padding-top: 10px;
+        }
+        .nav{
+            margin-left: 800px;
+            margin-right: 100px;
+            padding: 20px;
+            height: 70px;
+            align-items: center;
+            border-style: none;
+            border-radius: 80px;
+            border-width: 200px;
+        }
+        .nav1{
+            margin-left: 880px;
+            margin-right: 100px;
+            padding: 20px;
+            height: 70px;
+            align-items: center;
+            border-style: none;
+            border-radius: 80px;
+            border-width: 200px;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .warmth{
+            width: 550px;
+            height: 500px;
+            text-align: justify;
+            float: left;
+            margin-left: 120px;
+            margin-top: 60px;
+            padding-top: 20px;
+            padding-right: 20px;
+            padding-left: 20px;
+            padding-bottom: 20px;
+            background-color: white;
+            opacity: 0.6;
+            border-radius: 20px;
+            border-color: black;
+        }
+        .psize{
+            padding-top: 10px;
+            font-size: 20px;
+        }
+        .image{
+            float: right;
+            margin-top: 80px;
+            margin-right: 200px;
+            height: 100vh;
+        }
+        .spinning{
+            animation: spin 50s infinite linear; 
+        }
+        
+        @keyframes spin {
+            from {
+                transform: rotate(0deg); 
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .dropdown-button {
+            border: none;
+            cursor: pointer;
+            height: 50px;
+            margin: 10px;
+            width: 110px;
+            color: black;
+            font-size: 20px;
+            border-radius: 75px;
+            background-color: #f7efa8;
+          }
+          
+          /* Dropdown content (hidden by default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: transparent;
+            width: 160px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content option {
+            color: black;
+            padding: 12px 16px;
+            font-size: 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .option{
+            border: none;
+            background-color: transparent ;
+            height: 50px;
+            width: 110px;
+            color: black;
+            font-size: 20px;
+          }
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+        .name{
+            margin-top: 190px;
+            margin-bottom: 150px;
+            margin-left: 250px;
+            margin-right: 250px;
+            padding-top: 10px;
+        }
+        .Res{
+            background-color: gold;
+            text-align: center;
+            color: black;
+            font-size: 100px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .b1{
+            border: none;
+            height: 50px;
+            margin: 10px;
+            width: 110px;
+            font-size: 15px;
+            background-color: transparent;
+            font-size: 24px;
+            color: white;
+            transition: color 0.3s; 
+        }
+        .b1:hover{
+            background-color: transparent;
+            color: #228B22; 
+        }
+        .b3{
+            border: none;
+            height: 50px;
+            margin: 10px;
+            width: 110px;
+            font-size: 15px;
+            background-color: transparent;
+            font-size: 24px;
+            color: black;
+            transition: color 0.3s; 
+        }
+        .b3:hover{
+            background-color: transparent;
+            color: #228B22; 
+        }
+        .container{
+            margin: 0 auto;
+            padding: 0;
+            width: 1600px;
+            height: 750px;
+            background-image: url(./palebg.png);
+            background-repeat: no-repeat;
+            background-size: cover; 
+            background-position: center; 
+        }
+        #udon-check{
+            width: 5px;
+        }
+        .footalign{
+            padding-top: 50px;
+        }
+        .footer{
+            margin-top:590px;
+            align-content: baseline;
+            padding-left:500px;
+            text-align: center;
+            background-color: #d2a647;
+        }
+        .img{
+            width: 100px;
+            height: 100px;
+        }
+        
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="intro">
+    <div class = "navalign">
+        <div class = "ResName">
+            <div class="nav1">
+                        <a href="Restaurant.html"><button class = "b3" type="button" ><strong>Home</strong></button></a>
+                        <a href="AboutUs.html"><button class = "b3" type="button"> <strong>About</strong></button></a>
+                        <a href="menu.html"><button class = "b3" type="button"> <strong>Menu</strong></button></a>
+                        <a href="../Finals.html"><button class = "b3" type="button"> <strong>Exit</strong></button></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="heading">
+            ABOUT US
+    </div>
+    
+    <div class="introduction">
+        <h3>INTRODUCTION</h3>
+        <p>Welcome to Taki Japanese Restaurant</p>
+        <p>
+        At Taki Japanese Restaurant, we invite you on a culinary journey through the vibrant and diverse flavors of Japan. Nestled in the heart of Tokyo, our restaurant offers an authentic Japanese dining experience that celebrates tradition while embracing innovation.
+        </p>
+        <p>
+        Quality is the cornerstone of our philosophy at Taki Japanese Restaurant. We source the freshest ingredients locally and globally to ensure that every dish exceeds your expectations. From premium cuts of sashimi-grade fish to hand-selected produce, we spare no effort in delivering the finest Japanese cuisine to your table.
+        </p>
+        <p>
+        Join us at Taki Japanese Restaurant and embark on a culinary journey that tantalizes the senses and nourishes the soul. Whether you're a seasoned sushi aficionado or a newcomer to Japanese cuisine, our menu offers something to delight every palate. Come discover the essence of Japan, one bite at a time, at Taki.
+        </p>
+        <p>
+        Arigatou gozaimasu, and we look forward to serving you.
+        </p>
+    </div>
+    <div class="history">
+        <h3>HISTORY</h3>
+        <p>
+        At Taki Japanese Restaurant, we invite you on a culinary journey through the vibrant and diverse flavors of Japan. Nestled in the heart of Tokyo, our restaurant offers an authentic Japanese dining experience that celebrates tradition while embracing innovation.
+        </p>
+        <p>
+        Quality is the cornerstone of our philosophy at Taki Japanese Restaurant. We source the freshest ingredients locally and globally to ensure that every dish exceeds your expectations. From premium cuts of sashimi-grade fish to hand-selected produce, we spare no effort in delivering the finest Japanese cuisine to your table.
+        </p>
+        <p>
+        Join us at Taki Japanese Restaurant and embark on a culinary journey that tantalizes the senses and nourishes the soul. Whether you're a seasoned sushi aficionado or a newcomer to Japanese cuisine, our menu offers something to delight every palate. Come discover the essence of Japan, one bite at a time, at Taki.
+        </p>
+        <p>
+        Arigatou gozaimasu, and we look forward to serving you.
+        </p>
+    </div>
+</div>
+</body>
+</html>

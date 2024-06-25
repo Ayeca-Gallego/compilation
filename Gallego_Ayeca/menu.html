@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<head>
+    <title>Appetizer</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        .navalign{
+            padding-top: 50px;
+            margin-left: 500px;
+        }
+        .b2{
+            border: none;
+            height: 50px;
+            margin: 10px;
+            width: 110px;
+            font-size: 15px;
+            background-color: transparent;
+            font-size: 24px;
+            color: white;
+            transition: color 0.3s; 
+        }
+        .boxalign{
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+        }
+        .boxalign input[type="checkbox"]{
+            width: 50px; 
+            height: 60px; 
+             margin-right: 10px; 
+        }
+        .boxalign input[type="number"] {
+          margin-right: 5px; 
+        }
+        .quan{
+            width: 60px;
+            height: 50px;
+            text-align: center;
+            font-size: 25px;
+            align-items: center;
+        }
+        #udon-checkbox{
+            width: 40px;
+        }
+        .nav3 .check{
+            width: 40px;
+            height: 0px;
+        }
+        center .check{
+            width: 40px;
+            height: 0px;
+        }
+        .b2:hover{
+            background-color: transparent;
+            color: #228B22; 
+        }
+        /* CSS for modal dialog */
+        .dialog-overlay {
+            display: none; /* Hide the modal by default */
+            position: fixed; /* Fixed position */
+            z-index: 1; /* Ensure it's on top of other content */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Allow scrolling */
+            background-color: rgba(0,0,0,0.4); /* Semi-transparent background */
+        }
+        
+        /* Style for modal content */
+        .dialog-box {
+            background-color: #fefefe; /* White background */
+            margin: 15% auto; /* Center the modal vertically and horizontally */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 40%; /* Set width */
+        }
+        .dialog-content{
+            text-align: center;
+        }
+        #confirm{
+            padding: 10px 20px;
+            margin-top: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        #cancel{
+            padding: 10px 20px;
+            margin-top: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .container{
+            margin: 0 auto;
+            padding: 0;
+            width: 1600px;
+            height: 7100px;
+            background-color: #F7E7CE;
+            background-image: url(./palebg.png);
+            background-repeat: repeat-y;
+            background-position: center; 
+        }
+        .checkout{
+            height: 50px;
+            width: 150px;
+            position: fixed;
+            margin-left: 1330px;
+            opacity: 0.8;
+            font-size: 20px;
+            border-radius: 10px;
+        }
+        /* Close button style */
+        .dialog-close {
+            color: #aaa; /* Light gray text */
+            float: right; /* Align to the right */
+            font-size: 28px; /* Font size */
+            font-weight: bold; /* Bold font weight */
+        }
+        
+        /* Hover effect for close button */
+        .dialog-close:hover,
+        .dialog-close:focus {
+            color: black; /* Change color on hover/focus */
+            text-decoration: none; /* Remove underline */
+            cursor: pointer; /* Show cursor as pointer */
+        }
+        .nav{
+            padding-bottom: 20px;
+            margin-left: 100px;
+            margin-right: 100px;
+            padding: 20px;
+            height: 80px;
+            background: transparent;
+            border-style: none;
+            border-radius: 80px;
+            border-width: 200px;
+        }
+        .nav3{
+            margin-left: 100px;
+            margin-right: 100px;
+            background: transparent;
+            border-style: none;
+            border-radius: 80px;
+            border-width: 200px;
+        }
+        
+        .menu{
+            padding: 0 10px 30px 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(350px,1fr));
+            grid-gap: 20px 40px;
+        }
+        .heading{
+            width: 300px;
+            margin-top: 10px;
+            margin-left: 600px;
+            margin-right: 200px;
+            background:white;
+            opacity: 0.5;
+            color: black;
+            padding-top: 10px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            grid-column: 1/-1;
+            text-align: center;
+        }
+        .heading h1{
+            font-weight: 400;
+            font-size: 32px;
+            letter-spacing: 10px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .heading h3{
+            font-weight: 600;
+            font-size: 22px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+        .food{
+            display: grid;
+            position: relative;
+            grid-template-rows: auto 1fr;
+            border-radius: 15px;
+            box-shadow: 0 0 15px gold;
+        }
+        .food img{
+            position: relative;
+            width: 100%;
+            height: 280px;
+            border-radius: 15px 15px 0 0;
+            cursor: pointer;
+        }
+        h1{
+            grid-column: 1/-1;
+            text-align: grid;
+            grid-template-rows: auto 1fr 50px;
+            grid-row-gap: 15px;
+        }
+        .details{
+            padding: 20px 10px;
+            background-color: gold;
+            display: grid;
+            grid-template-rows: auto 1fr 50px;
+            grid-row-gap:15px;
+        }
+        .details-sub>h5{
+            font-weight: 700;
+            font-size: 20px;
+        }
+        .checkalign{
+            align-items: center;
+        }
+        .footalign{
+            padding-top: 100px;
+        }
+        .footer{
+            align-content: baseline;
+            text-align: center;
+            background-color: #d2a647;
+        }
+    </style>
+<body>
+<div class="container">
+        <div class = "navalign">
+            <div class = "ResName">
+                <div class="nav">
+                    <div align = "center">
+                        <div class="nav">
+                            <a href="Restaurant.html"><button class = "b2" type="button" ><strong>Home</strong></p></button></a>
+                            <a href="AboutUs.html"><button class = "b2" type="button"><strong> About</strong></button></a>
+                            <a href="menu.html"><button class = "b2" type="button"> <strong>Menu</strong></button></a>
+                            <a href="../Finals.html"><button class = "b2" type="button"> <strong>Exit</strong></button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+            <div class = "menu">
+                <div class="heading">
+                    <h1>Main Dish</h1>
+                </div>
+                <div class="food">
+                        <img src="./chickencurry.jpg" >
+                        <div class="details">
+                                <div class="details-sub">
+                                    <h5>Japanese Chicken Curry</h5>
+                                    <h5 class="price">369 Php</h5>
+                                </div>
+                                <p><b>Japanese Curry</b> is a thick curry with a stew-like consistency and commonly includes protein, sweet onions, carrots, and potatoes. </p>
+                                <div class="boxalign">
+                                    <label for="chicken-checkbox">Add</label>
+                                    <input class="check" type="checkbox" id="chicken-checkbox" >
+                                    <label for="chicken-quantity">Quantity</label>
+                                    <input type="number" class="quan" id="chicken-quantity" value="1" > 
+                                </div>
+                        </div>
+                </div>
+                <div class="food">
+                    <img src="./yakisoba.jpg" >
+                    <div class="details">
+                            <div class="details-sub">
+                                <h5>Yakisoba</h5>
+                                <h5 class="price">320 Php</h5>
+                            </div>
+                            <p><b>Yakisoba (焼きそば) </b> a stir-fried noodle dish that typically includes meat or seafood, as well as vegetables such as cabbage, carrots, onions, and bean sprouts. </p>
+                            <div class="boxalign">
+                                <label for="yakisoba-checkbox">Add</label>
+                                <input class="check" type="checkbox" id="yakisoba-checkbox" >
+                                <label for="yakisoba-quantity">Quantity</label>
+                                <input type="number" class="quan" id="yakisoba-quantity" value="1" > 
+                            </div>
+                    </div>
+                </div>
+
+                <div class="food">
+                    <img src="./oyakodon.jpg" >
+                    <div class="details">
+                            <div class="details-sub">
+                                <h5>Oyakodon</h5>
+                                <h5 class="price">320 Php</h5>
+                            </div>
+                            <p><b> Oyakodon </b> is a classic comfort food of Japanese home cooking. Tender pieces of chicken, onions, and eggs are simmered in an umami-rich sauce.</p>
+                            <div class="boxalign">
+                                <label for="oya-checkbox">Add</label>
+                                <input class="check" type="checkbox" id="oya-checkbox" >
+                                <label for="oya-quantity">Quantity</label>
+                                <input type="number" class="quan" id="oya-quantity" value="1" > 
+                            </div>
+                    </div>
+                </div>
+
+                <div class="food">
+                    <img src="./tonkatsu.jpg" >
+                    <div class="details">
+                            <div class="details-sub">
+                                <h5>Tonkatsu</h5>
+                                <h5 class="price">450 Php</h5>
+                            </div>
+                            <p><b>  Tonkatsu (とんかつ, 豚かつ)  </b>or deep-fried pork cutlet. This Western-inspired dish has been enjoyed for over 120 years, with the recipe remaining mostly unchanged since then.   </p>
+                            <div class="boxalign">
+                                <label for="tonka-checkbox">Add</label>
+                                <input class="check" type="checkbox" id="tonka-checkbox" >
+                                <label for="tonka-quantity">Quantity</label>
+                                <input type="number" class="quan" id="tonka-quantity" value="1" > 
+                            </div>
+                    </div>
+                </div>
+
+                <div class="food">
+                    <img src="./gyudon.jpg" >
+                    <div class="details">
+                            <div class="details-sub">
+                                <h5>Gyudon</h5>
+                                <h5 class="price">200 Php</h5>
+                            </div>
+                            <p><b>  Gyudon (牛丼)  </b> is a classic comfort food that has held its place in Japanese cuisine for over 150 years. </p>
+                            <div class="boxalign">
+                                <label for="gyudon-checkbox">Add</label>
+                                <input class="check" type="checkbox" id="gyudon-checkbox" >
+                                <label for="gyudon-quantity">Quantity</label>
+                                <input type="number" class="quan" id="gyudon-quantity" value="1" > 
+                            </div>
+                    </div>
+                </div>
+
+                <div class="food">
+                    <img src="./tonkatsuramen.jpg" >
+                    <div class="details">
+                            <div class="details-sub">
+                                <h5>Tonkatsu Ramen</h5>
+                                <h5 class="price">320 Php</h5>
+                            </div>
+                            <p><b>  Tonkatsu Ramen  </b>  is a deliciously creamy pork bone broth traditionally served up with long thin noodles and topped with a variety of ingredients.  </p>
+                            <div class="boxalign">
+                                <label for="tonkatsu-checkbox">Add</label>
+                                <input class="check" type="checkbox" id="tonkatsu-checkbox" >
+                                <label for="tonkatsu-quantity">Quantity</label>
+                                <input type="number" class="quan" id="tonkatsu-quantity" value="1" > 
+                            </div>
+                    </div>
+                </div>
+
+                <div class="food">
+                    <img src="./kake.jpg" >
+                    <div class="details">
+                            <div class="details-sub">
+                                <h5>Kake Udon</h5>
+                                <h5 class="price">350 Php</h5>
+                            </div>
+                            <p><b>  Kake udon (かけうどん) </b> a traditional Japanese noodle dish made with fresh udon noodles and kakejiru.</p>
+                            <div class="boxalign">
+                                <label for="kake-checkbox">Add</label>
+                                <input class="check" type="checkbox" id="kake-checkbox" >
+                                <label for="kake-quantity">Quantity</label>
+                                <input type="number" class="quan" id="kake-quantity" value="1" > 
+                            </div>
+                    </div>
+                </div>
+
+                <div class="food">
+                    <img src="./shoyu.jpg" >
+                    <div class="details">
+                            <div class="details-sub">
+                                <h5>Shoyu Ramen</h5>
+                                <h5 class="price">300 Php</h5>
+                            </div>
+                            <p><b>  Shoyu Ramen </b> is a ramen dish with a broth made of soy sauce. Shoyu means soy sauce in Japanese.</p>
+                            <div class="boxalign">
+                                <label for="shoyu-checkbox">Add</label>
+                                <input class="check" type="checkbox" id="shoyu-checkbox" >
+                                <label for="shoyu-quantity">Quantity</label>
+                                <input type="number" class="quan" id="shoyu-quantity" value="1" > 
+                            </div>
+                    </div>
+                </div>
+
+                <div class="food">
+                    <img src="./miso.jpg" >
+                    <div class="details">
+                            <div class="details-sub">
+                                <h5>Miso Ramen</h5>
+                                <h5 class="price">360 Php</h5>
+                            </div>
+                            <p><b> Miso Ramen</b> is normally made with a chicken or fish-based broth to which the miso tare is added. </p>
+                            <div class="boxalign">
+                                <label for="miso-checkbox">Add</label>
+                                <input class="check" type="checkbox" id="miso-checkbox" >
+                                <label for="miso-quantity">Quantity</label>
+                                <input type="number" class="quan" id="miso-quantity" value="1" > 
+                            </div>
+                    </div>
+                </div>
+
+
+                <div class="food">
+                    <img src="./curry udon.jpg" >
+                    <div class="details">
+                            <div class="details-sub">
+                                <h5>Curry Udon</h5>
+                                <h5 class="price">380 Php</h5>
+                            </div>
+                            <p><b> Curry udon</b> consists of udon noodles mixed with Japanese curry sauce and tsuyu to make a hearty, warming noodle soup with all of the rich flavour of katsu curry.  </p>
+                            <div class="boxalign">
+                                <label for="curry-checkbox">Add</label>
+                                <input class="check" type="checkbox" id="curry-checkbox" >
+                                <label for="curry-quantity">Quantity</label>
+                                <input type="number" class="quan" id="curry-quantity" value="1" > 
+                            </div>
+                    </div>
+                </div>
+                    <div class="heading">
+                        <h1>SIDE DISH</h1>
+                    </div>
+                    <div class="food">
+                        <img src="./glazedeggplant.jpg" >
+                        <div class="details">
+                                <div class="details-sub">
+                                    <h5>Miso Glazed Eggplant</h5>
+                                    <h5 class="price">250</h5>
+                                </div>
+                                <p><b>Miso-Glazed Eggplant</b> is broiled in the oven. The eggplant pieces are nicely caramelized on the edges yet so creamy in the middle.</p>
+                                <div class="boxalign">
+                                    <label for="glazed-checkbox">Add</label>
+                                    <input class="check" type="checkbox" id="glazed-checkbox" >
+                                    <label for="glazed-quantity">Quantity</label>
+                                    <input type="number" class="quan" id="glazed-quantity" value="1" > 
+                                </div>
+                        </div>
+                </div>
+
+                <div class="food">
+                    <img src="./rameneggs.jpg" >
+                    <div class="details">
+                            <div class="details-sub">
+                                <h5>Ramen Eggs</h5>
+                                <h5 class="price">200</h5>
+                            </div>
+                            <p><b>  Ramen eggs</b> are Japanese soft-boiled eggs. They are marinated overnight in a sweetened soy-based sauce.  </p>
+                            <div class="boxalign">
+                                <label for="rameggs-checkbox">Add</label>
+                                <input class="check" type="checkbox" id="rameggs-checkbox" >
+                                <label for="rameggs-quantity">Quantity</label>
+                                <input type="number" class="quan" id="rameggs-quantity" value="1" > 
+                            </div>
+                    </div>
+                </div>
+
+                <div class="food">
+                    <img src="./mushroomrice.jpg" >
+                    <div class="details">
+                            <div class="details-sub">
+                                <h5>Japanese Mushroom Rice</h5>
+                                <h5 class="price">250</h5>
+                            </div>
+                            <p><b>  Japanese mushroom rice</b> is another variation of takikomi gohan, which is a Japanese mixed rice dish that incorporates steamed rice with a mixture of vegetables, proteins, and seasonings.  </p>
+                            <div class="boxalign">
+                                <label for="mushroom-checkbox">Add</label>
+                                <input class="check" type="checkbox" id="mushroom-checkbox" >
+                                <label for="mushroom-quantity">Quantity</label>
+                                <input type="number" class="quan" id="mushroom-quantity" value="1" > 
+                            </div>
+                    </div>
+                </div>
+
+                <div class="food">
+                    <img src="./yakionigiri.jpg" >
+                    <div class="details">
+                            <div class="details-sub">
+                                <h5>Yaki Onigiri</h5>
+                                <h5 class="price">280</h5>
+                            </div>
+                            <p><b>  Yaki Onigiri</b> are Japanese rice balls that are pan-grilled and glazed in savory soy sauce. With a crispy crust on the outside and tender rice on the inside </p>
+                            <div class="boxalign">
+                                <label for="yaki-checkbox">Add</label>
+                                <input class="check" type="checkbox" id="yaki-checkbox" >
+                                <label for="yaki-quantity">Quantity</label>
+                                <input type="number" class="quan" id="yaki-quantity" value="1" > 
+                            </div>
+                    </div>
+                </div>
+
+                <div class="heading">
+                    <h1>DESSERT</h1>
+                </div>
+                <div class="food">
+                        <img src="./shortcake.jpg" >
+                        <div class="details">
+                                <div class="details-sub">
+                                    <h5>Japanese Strawberry Shortcake</h5>
+                                    <h5 class="price">180 Php</h5>
+                                </div>
+                                <p><b>Japanese Strawberry Shortcake</b> cake is soft and crumbly, with a sweet vanilla flavor that perfectly complements the juicy, tart strawberries. The cake is moist and crumbly, while the whipped cream is light and fluffy.</p>
+								<div class="boxalign">
+									<label for="short-checkbox">Add</label>
+									<input class="check" type="checkbox" id="short-checkbox" >
+									<label for="short-quantity">Quantity</label>
+									<input type="number" class="quan" id="short-quantity" value="1" > 
+								</div> 
+                        </div>
+                </div>
+            </div>
+
+            <div class="food">
+                <img src="./fluffypancake.jpg" >
+                <div class="details">
+                        <div class="details-sub">
+                            <h5>Fluffy Pancake</h5>
+                            <h5 class="price">170</h5>
+                        </div>
+                        <p><b> Fluffy Pancake </b> a pancake made using soufflé techniques. Egg whites are whipped up with sugar into a glossy thick meringue then mixed with a batter made with the yolks. </p>
+						<div class="boxalign">
+							<label for="fluffy-checkbox">Add</label>
+							<input class="check" type="checkbox" id="fluffy-checkbox" >
+							<label for="fluffy-quantity">Quantity</label>
+							<input type="number" class="quan" id="fluffy-quantity" value="1" > 
+						</div>
+                </div>
+            </div>
+
+            <div class="food">
+                <img src="./fruitcake.jpg" >
+                <div class="details">
+                        <div class="details-sub">
+                            <h5>Fruit Cake</h5>
+                            <h5 class="price">210</h5>
+                        </div>
+                        <p><b>  Tonkatsu (とんかつ, 豚かつ)  </b>or deep-fried pork cutlet. This Western-inspired dish has been enjoyed for over 120 years, with the recipe remaining mostly unchanged since then.   </p>
+						<div class="boxalign">
+							<label for="fruit-checkbox">Add</label>
+							<input class="check" type="checkbox" id="fruit-checkbox" >
+							<label for="fruit-quantity">Quantity</label>
+							<input type="number" class="quan" id="fruit-quantity" value="1" > 
+						</div>
+                </div>
+            </div>
+
+            <div class="food">
+                <img src="./cheesecake.jpg" >
+                <div class="details">
+                        <div class="details-sub">
+                            <h5>Japanese Cheese Cake</h5>
+                            <h5 class="price">170</h5>
+                        </div>
+                        <p><b>  Japanese cheesecake </b>is a glorious dessert known for its ultra-creamy, super luxurious, slightly tangy flavor and airy, soufflé-like character.  </p>
+						<div class="boxalign">
+							<label for="cheese-checkbox">Add</label>
+							<input class="check" type="checkbox" id="cheese-checkbox" >
+							<label for="cheese-quantity">Quantity</label>
+							<input type="number" class="quan" id="cheese-quantity" value="1" > 
+						</div>
+                </div>
+            </div>
+
+            <div class="heading">
+                <h1>BEVERAGES</h1>
+            </div>
+            <div class="food">
+                    <img src="./amazake.jpg" >
+                    <div class="details">
+                            <div class="details-sub">
+                                <h5>Amazake</h5>
+                                <h5 class="price">120 Php</h5>
+                            </div>
+                            <p><b>Amazake</b>  is a traditional Japanese drink made of fermented rice. Literally means “sweet” and  “sake” , it has a creamy, thick consistency with a sweet flavor, served either chilled or warm/hot. </p>
+							<div class="boxalign">
+								<label for="amazake-checkbox">Add</label>
+								<input class="check" type="checkbox" id="amazake-checkbox" >
+								<label for="amazake-quantity">Quantity</label>
+								<input type="number" class="quan" id="amazake-quantity" value="1" > 
+							</div>
+                    </div>
+            </div>
+            <div class="food">
+                <img src="./matchalatte.jpg" >
+                <div class="details">
+                        <div class="details-sub">
+                            <h5>Matcha Latte</h5>
+                            <h5 class="price">170</h5>
+                        </div>
+                        <p><b> Matcha Latte </b> consists of matcha powder green tea plants, water, and milk. If the matcha powder is unsweetened, the drink is then often sweetened with honey or syrup. </p>
+						<div class="boxalign">
+							<label for="matcha-checkbox">Add</label>
+							<input class="check" type="checkbox" id="matcha-checkbox" >
+							<label for="matcha-quantity">Quantity</label>
+							<input type="number" class="quan" id="matcha-quantity" value="1" > 
+						</div>
+                </div>
+        </div>
+
+        <div class="food">
+            <img src="./gingertea.jpg" >
+            <div class="details">
+                    <div class="details-sub">
+                        <h5>Honey Ginger Tea</h5>
+                        <h5 class="price">90</h5>
+                    </div>
+                    <p><b>  Honey Ginger Tea</b>is a simple tea made by steeping ginger in hot water and sweetening it with honey. It is also a popular home remedy in Japan, passed down for generations to fight off common colds.  </p>
+					<div class="boxalign">
+						<label for="honey-checkbox">Add</label>
+						<input class="check" type="checkbox" id="honey-checkbox" >
+						<label for="honey-quantity">Quantity</label>
+						<input type="number" class="quan" id="honey-quantity" value="1" > 
+					</div>
+            </div>
+        </div>
+
+        <div class="food">
+            <img src="./icedmatcha.jpg" >
+            <div class="details">
+                    <div class="details-sub">
+                        <h5>Iced Matcha Latte</h5>
+                        <h5 class="price">170</h5>
+                    </div>
+                    <p><b> Iced Matcha Latte  </b> is a cool and creamy beverage made by blending matcha powder with cold milk and pouring it over ice. </p>
+					<div class="boxalign">
+						<label for="latte-checkbox">Add</label>
+						<input class="check" type="checkbox" id="latte-checkbox" >
+						<label for="latte-quantity">Quantity</label>
+						<input type="number" class="quan" id="latte-quantity" value="1" > 
+					</div>
+            </div>
+            
+        </div>
+
+        <div class="food">
+            <img src="./coldcoffee.jpg" >
+            <div class="details">
+                    <div class="details-sub">
+                        <h5>Cold Brew Coffee</h5>
+                        <h5 class="price">180</h5>
+                    </div>
+                    <p><b>  Cold Brew Coffee</b> is a coffee that has been brewed with cold rather than hot water and usually involves a , long steeping process. Cold brew is generally characterized as smooth, low-acid, and heavier than its hot brewed counterparts. </p>
+					<div class="boxalign">
+						<label for="cold-checkbox">Add</label>
+						<input class="check" type="checkbox" id="cold-checkbox" >
+						<label for="cold-quantity">Quantity</label>
+						<input type="number" class="quan" id="cold-quantity" value="1" > 
+					</div>
+            </div>
+        </div>
+
+        <div class="heading">
+            <h1>ADD ONS</h1>
+        </div>
+        <div class="food">
+                <img src="./water.jpg" >
+                <div class="details">
+                    <div class="details">
+                        <div class="details-sub">
+                            <h5>Water</h5>
+                            <h5 class="price">20 Php</h5>
+                        </div>
+						<div class="boxalign">
+							<label for="water-checkbox">Add</label>
+							<input class="check" type="checkbox" id="water-checkbox" >
+							<label for="water-quantity">Quantity</label>
+							<input type="number" class="quan" id="water-quantity" value="1" > 
+						</div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="food">
+            <img src="./extra.jpg" >
+            <div class="details">
+                <div class="details">
+                    <div class="details-sub">
+                        <h5>Rice</h5>
+                        <h5 class="price">20 Php</h5>
+                    </div>
+					<div class="boxalign">
+						<label for="rice-checkbox">Add</label>
+						<input class="check" type="checkbox" id="rice-checkbox" >
+						<label for="rice-quantity">Quantity</label>
+						<input type="number" class="quan" id="rice-quantity" value="1" > 
+					</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food">
+            <img src="./extraramen.jpg" >
+            <div class="details">
+                <div class="details">
+                    <div class="details-sub">
+                        <h5>EXTRA RAMEN NOODLES</h5>
+                        <h5 class="price">100 Php</h5>
+                    </div>
+					<div class="boxalign">
+						<label for="exramen-checkbox">Add</label>
+						<input class="check" type="checkbox" id="exramen-checkbox" >
+						<label for="exramen-quantity">Quantity</label>
+						<input type="number" class="quan" id="exramen-quantity" value="1" > 
+					</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food">
+            <img src="./extraudon.jpg" >
+            <div class="details">
+                <div class="details">
+                    <div class="details-sub">
+                        <h5>EXTRA UDON  NOODLES</h5>
+                        <h5 class="price">100 Php</h5>
+                    </div>
+					<div class="boxalign">
+						<label for="udon-checkbox">Add</label>
+						<input class="check" type="checkbox" id="udon-checkbox" >
+						<label for="udon-quantity">Quantity</label>
+						<input type="number" class="quan" id="udon-quantity" value="1" > 
+					</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food">
+            <img src="./hot.jpg" >
+            <div class="details">
+                <div class="details">
+                    <div class="details-sub">
+                        <h5>Hot Tea</h5>
+                        <h5 class="price">50 Php</h5>
+                    </div>
+					<div class="boxalign">
+						<label for="tea-checkbox">Add</label>
+						<input class="check" type="checkbox" id="tea-checkbox" >
+						<label for="tea-quantity">Quantity</label>
+						<input type="number" class="quan" id="tea-quantity" value="1" > 
+					</div>
+                </div>
+            </div>
+        </div>
+        <button class="checkout" onclick="checkout()">Checkout</button>
+                <div id="dialog-overlay" class="dialog-overlay">
+                    <div id="dialog-box" class="dialog-box">
+                        <span id="dialog-close" class="dialog-close" onclick="closeDialog()">X</span>
+                        <div id="dialog-content" class="dialog-content">
+                            <p id="dialog-message" class="dialog-message"></p>
+                            <button id="cancel"  onclick="closeDialog()"> Cancel</button>
+                            <button id="confirm" onclick="closeDialog()">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+<script>
+    function checkout() {
+        let totalPrice = 0;
+        const message = [];
+      
+        // Main Dishes
+        const mainDishes = [
+          { id: 'chicken-checkbox', quantityId: 'chicken-quantity', price: 369, name: 'Japanese Chicken Curry' },
+          { id: 'yakisoba-checkbox', quantityId: 'yakisoba-quantity', price: 320, name: 'Yakisoba' },
+          { id: 'oya-checkbox', quantityId: 'oya-quantity', price: 320, name: 'Oyakodon' },
+          { id: 'tonka-checkbox', quantityId: 'tonka-quantity', price: 450, name: 'Tonkatsu' },
+          { id: 'gyudon-checkbox', quantityId: 'gyudon-quantity', price: 200, name: 'Gyudon' },
+          { id: 'tonkatsu-checkbox', quantityId: 'tonkatsu-quantity', price: 320, name: 'Tonkatsu Ramen' },
+          { id: 'kake-checkbox', quantityId: 'kake-quantity', price: 350, name: 'Kake Udon' },
+          { id: 'shoyu-checkbox', quantityId: 'shoyu-quantity', price: 300, name: 'Shoyu Ramen' },
+          { id: 'miso-checkbox', quantityId: 'miso-quantity', price: 360, name: 'Miso Ramen' },
+          { id: 'tantan-checkbox', quantityId: 'tantan-quantity', price: 410, name: 'Tantanmen' },
+          { id: 'curry-checkbox', quantityId: 'curry-quantity', price: 380, name: 'Curry Udon' },
+          
+      
+          // Add more main dishes here
+        ];
+      
+        mainDishes.forEach(dish => {
+          if (document.getElementById(dish.id).checked) {
+            const quantity = parseInt(document.getElementById(dish.quantityId).value);
+            totalPrice += quantity * dish.price;
+            message.push(`${quantity} ${dish.name} - Total Price: ${quantity * dish.price} Php`);
+          }
+        });
+      
+        // Side Dishes
+        const sideDishes = [
+          { id: 'corn-checkbox', quantityId: 'corn-quantity', price: 180, name: 'Japanese Corn Rice' },
+          { id: 'glazed-checkbox', quantityId: 'glazed-quantity', price: 250, name: 'Miso Glazed Eggplant' },
+          { id: 'kinpira-checkbox', quantityId: 'kinpira-quantity', price: 250, name: 'Kinpira Gobo' },
+          { id: 'rameggs-checkbox', quantityId: 'rameggs-quantity', price: 200, name: 'Ramen Eggs' },
+          { id: 'mushroom-checkbox', quantityId: 'mushroom-quantity', price: 250, name: 'Japanese Mushroom Rice' },
+          { id: 'seaweed-checkbox', quantityId: 'seaweed-quantity', price: 450, name: 'Hijiki Seaweed Salad' },
+          { id: 'yaki-checkbox', quantityId: 'yaki-quantity', price: 280, name: 'Yaki Onigiri' },
+        ];
+      
+        sideDishes.forEach(dish => {
+          if (document.getElementById(dish.id).checked) {
+            const quantity = parseInt(document.getElementById(dish.quantityId).value);
+            totalPrice += quantity * dish.price;
+            message.push(`${quantity} ${dish.name} - Total Price: ${quantity * dish.price} Php`);
+          }
+        });
+        const dessert = [
+        { id: 'short-checkbox', quantityId: 'short-quantity', price: 180, name: 'Japanese Strawberry Shortcake' },
+        { id: 'swiss-checkbox', quantityId: 'swiss-quantity', price: 200, name: 'Matcha Swiss Roll' },
+        { id: 'fluffy-checkbox', quantityId: 'fluffy-quantity', price: 170, name: 'Fluffy Pancake' },
+        { id: 'fruit-checkbox', quantityId: 'fruit-quantity', price: 210, name: 'Fruit Cake' },
+        { id: 'cheese-checkbox', quantityId: 'cheese-quantity', price: 170, name: 'Japanese Cheese Cake' },  
+        ];
+      
+        dessert.forEach(dish => {
+          if (document.getElementById(dish.id).checked) {
+            const quantity = parseInt(document.getElementById(dish.quantityId).value);
+            totalPrice += quantity * dish.price;
+            message.push(`${quantity} ${dish.name} - Total Price: ${quantity * dish.price} Php`);
+          }
+        });
+      
+        const beverage = [
+          { id: 'amazake-checkbox', quantityId: 'amazake-quantity', price: 120, name: 'Amazake' },
+          { id: 'matcha-checkbox', quantityId: 'matcha-quantity', price: 170, name: 'Matcha Latte' },
+          { id: 'milktea-checkbox', quantityId: 'milktea-quantity', price: 100, name: 'Royal Milk Tea' },
+          { id: 'honey-checkbox', quantityId: 'honey-quantity', price: 90, name: 'Honey Ginger Tea' },
+          { id: 'latte-checkbox', quantityId: 'latte-quantity', price: 170, name: 'Iced Matcha Latte' },
+          { id: 'cold-checkbox', quantityId: 'cold-quantity', price: 180, name: 'Cold Brew Coffee' },
+      
+        ];
+      
+        beverage.forEach(dish => {
+          if (document.getElementById(dish.id).checked) {
+            const quantity = parseInt(document.getElementById(dish.quantityId).value);
+            totalPrice += quantity * dish.price;
+            message.push(`${quantity} ${dish.name} - Total Price: ${quantity * dish.price} Php`);
+          }
+        });
+      
+        const add = [
+        { id: 'water-checkbox', quantityId: 'water-quantity', price: 20, name: 'Water' },
+        { id: 'rice-checkbox', quantityId: 'rice-quantity', price: 20, name: 'Rice' },
+        { id: 'exramen-checkbox', quantityId: 'exramen-quantity', price: 100, name: 'Extra Ramen Noodles' },
+        { id: 'udon-checkbox', quantityId: 'udon-quantity', price: 100, name: 'Extra Udon Noodles' },
+        { id: 'tea-checkbox', quantityId: 'tea-quantity', price: 50, name: 'Hot Tea' },
+      
+        ];
+      
+        add.forEach(dish => {
+          if (document.getElementById(dish.id).checked) {
+            const quantity = parseInt(document.getElementById(dish.quantityId).value);
+            totalPrice += quantity * dish.price;
+            message.push(`${quantity} ${dish.name} - Total Price: ${quantity * dish.price} Php`);
+          }
+        });
+    
+      
+        // Displaying the message
+        const dialogOverlay = document.getElementById('dialog-overlay');
+        const dialogMessage = document.getElementById('dialog-message');
+        if (message.length > 0) {
+            dialogMessage.innerHTML = message.join('<br>') + `<br>Total: <span class="total-price">${totalPrice} Php</span>`;
+        } else {
+            dialogMessage.textContent = 'No items selected.';
+        }
+        dialogOverlay.style.display = 'block';
+
+    }
+      
+      function closeDialog() {
+        const dialogOverlay = document.getElementById('dialog-overlay');
+        dialogOverlay.style.display = 'none';
+       
+      }
+      
+      document.getElementById("confirm").addEventListener("click", function() {
+          alert("You've successfully placed your order.");
+          }
+      );
+      
+      document.getElementById("cancel").addEventListener("click", function() {
+          alert("Order Cancelled.");
+      });
+
+</script>
+</body>
+</html>
